@@ -41,10 +41,10 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void run() {
-				finish();
 				Intent intent = new Intent();
 				intent.setClass(MainActivity.this, QuestionActivity.class);
 				startActivity(intent);
+				finish();
 			}
 		}, time);
 	}

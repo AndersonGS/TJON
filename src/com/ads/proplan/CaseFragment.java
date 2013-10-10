@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class CaseFragment extends Fragment {
 	
@@ -19,6 +20,10 @@ public class CaseFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_case, container,
 				false);
+		Bundle args = getArguments();
+		QuestionEntity questionEntity = (QuestionEntity) args.getSerializable(ARG_OBJECT);
+		((TextView) rootView.findViewById(R.id.case_text_description)).setText(questionEntity.getDescription());
+		 
 		return rootView;
 	}
 

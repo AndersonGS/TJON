@@ -1,10 +1,22 @@
 package com.ads.proplan;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.TextView;
 
 public class OptionsFragment extends Fragment {
 
@@ -13,13 +25,74 @@ public class OptionsFragment extends Fragment {
 	 * objetivo dessa variavel é determinar o nome do fragmento.
 	 */
 	public static final String ARG_OBJECT = "object";
+	private Activity activity;
+	private QuestionEntity questionEntity ;
+	private View rootView;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_options, container,
+		rootView = inflater.inflate(R.layout.fragment_options, container,
 				false);
+		Bundle args = getArguments();
+		questionEntity = (QuestionEntity) args.getSerializable(ARG_OBJECT);
+		setObject();
+		addButton();
 		return rootView;
+	}
+
+	private void setObject() {
+		((TextView) rootView.findViewById(R.id.option_text_question)).setText(questionEntity.getQuestion());
+		((TextView) rootView.findViewById(R.id.option_radioButton1)).setText(questionEntity.getAlternative1());
+		((TextView) rootView.findViewById(R.id.option_radioButton2)).setText(questionEntity.getAlternative2());
+		((TextView) rootView.findViewById(R.id.option_radioButton3)).setText(questionEntity.getAlternative3());
+		((TextView) rootView.findViewById(R.id.option_radioButton4)).setText(questionEntity.getAlternative4());
+		activity = questionEntity.getActivity();
+	}
+
+	private void addButton( ) {
+		ActionButtonSkip();	
+		ActionButtonRespond();
+	}
+
+	private void ActionButtonSkip( ) {
+		((Button) rootView.findViewById(R.id.option_button_skip)).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setClass(activity, QuestionActivity.class);
+				startActivity(intent);
+				activity.finish();
+			}
+		});
+	}
+
+	private void ActionButtonRespond() {
+		((Button) rootView.findViewById(R.id.option_button_respond)).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				verifyCorrectAlternative();
+				
+				new Handler().post(new Runnable() {
+                    public void run() {
+                    	Intent intent = new Intent();
+						intent.setClass(activity, QuestionActivity.class);
+						try {
+							Thread.sleep(2000);
+						} catch (InterruptedException e) {
+						}
+						startActivity(intent);
+						activity.finish();
+                    }
+                });
+				
+			}
+		});
+	}
+
+	private void 
+verifyCorrectAlternative( ) {
+		((RadioButton) rootView.findViewById(R.id.option_radioButton1)).setBackgroundColor(Color.GREEN);
 	}
 	
 }

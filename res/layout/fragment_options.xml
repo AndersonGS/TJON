@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:text="Pergunta"
         android:textAlignment="center"
         android:textSize="20dp"
@@ -31,34 +31,35 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="30dp"
         android:orientation="vertical" >
 
         <RadioButton
             android:id="@+id/option_radioButton1"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="56dp"
             android:text="Opção1" />
 
         <RadioButton
             android:id="@+id/option_radioButton2"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Opção2" />
 
         <RadioButton
             android:id="@+id/option_radioButton3"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="17dp"
             android:text="Opção3" />
 
         <RadioButton
             android:id="@+id/option_radioButton4"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="17dp"
             android:text="Opção4" />

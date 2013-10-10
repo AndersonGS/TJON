@@ -5,6 +5,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 public class PagesFragment extends FragmentStatePagerAdapter {
 
@@ -14,9 +17,12 @@ public class PagesFragment extends FragmentStatePagerAdapter {
 	 * classe.
 	 */
 	private static final String TAG_LOG = "PagesFragment";
+
+	QuestionEntity questionEntity;
 	
-	public PagesFragment(FragmentManager fm) {
-		super(fm);
+	public PagesFragment(FragmentManager fm, QuestionEntity questionEntity) {
+		super(fm);	
+		this.questionEntity = questionEntity;
 	}
 
 	@Override
@@ -27,13 +33,13 @@ public class PagesFragment extends FragmentStatePagerAdapter {
 		case 0:
 			fragment = new CaseFragment();
 			args = new Bundle();
-			args.putInt(CaseFragment.ARG_OBJECT, i + 1);
+			args.putSerializable(CaseFragment.ARG_OBJECT, questionEntity);
 			fragment.setArguments(args);
 			break;
 		case 1:
 			fragment = new OptionsFragment();
 			args = new Bundle();
-			args.putInt(OptionsFragment.ARG_OBJECT, i + 1);
+			args.putSerializable(CaseFragment.ARG_OBJECT, questionEntity);
 			fragment.setArguments(args);
 			break;
 		default:
