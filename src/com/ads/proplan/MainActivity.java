@@ -43,8 +43,8 @@ public class MainActivity extends Activity {
 			public void run() {
 				finish();
 				Intent intent = new Intent();
-				// intent.setClass(SplashScreens.this, MenuActivity.class);
-				// startActivity(intent);
+				intent.setClass(MainActivity.this, QuestionActivity.class);
+				startActivity(intent);
 			}
 		}, time);
 	}
