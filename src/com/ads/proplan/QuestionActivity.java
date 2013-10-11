@@ -1,15 +1,14 @@
 package com.ads.proplan;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import com.googlecode.androidannotations.annotations.EActivity;
+import com.googlecode.androidannotations.annotations.EFragment;
+import com.googlecode.androidannotations.annotations.ViewById;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -38,6 +37,7 @@ public class QuestionActivity extends FragmentActivity {
 
 	private ImageView imageView;
 
+	//@ViewById(R.id.question_bar_time)
 	private ProgressBar bar;
 
 	ImageView caseImage;
@@ -57,8 +57,6 @@ public class QuestionActivity extends FragmentActivity {
 
 		caseImage = (ImageView) findViewById(R.id.case_image_arcada);
 		caseText = (TextView) findViewById(R.id.case_text_description);
-		
-		
 		
 		QuestionEntity questionEntity = new QuestionEntity();
 		provisorioEntidade(questionEntity);
