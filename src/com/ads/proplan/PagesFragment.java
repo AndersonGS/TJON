@@ -5,9 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 public class PagesFragment extends FragmentStatePagerAdapter {
 
@@ -23,6 +20,7 @@ public class PagesFragment extends FragmentStatePagerAdapter {
 	public PagesFragment(FragmentManager fm, QuestionEntity questionEntity) {
 		super(fm);	
 		this.questionEntity = questionEntity;
+		Log.i(TAG_LOG, "PagesFragment");
 	}
 
 	@Override

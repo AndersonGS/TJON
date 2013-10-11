@@ -3,24 +3,22 @@ package com.ads.proplan;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.googlecode.androidannotations.annotations.EActivity;
-
-import android.os.Bundle;
-import android.provider.ContactsContract.CommonDataKinds.Im;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.widget.ImageView;
 
-@EActivity(R.layout.activity_main)
+//@EActivity(R.layout.activity_main)
 public class MainActivity extends Activity {
 
-	private ImageView iconeImageView;
+	//@ViewById(R.id.splash_image_icone)
+	public ImageView iconeImageView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_main);
 		iconeImageView = (ImageView) findViewById(R.id.splash_image_icone);
 	}
 

@@ -18,12 +18,10 @@ public class CaseFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_case, container,
-				false);
+		View rootView = inflater.inflate(R.layout.fragment_case, container,	false);
 		Bundle args = getArguments();
 		QuestionEntity questionEntity = (QuestionEntity) args.getSerializable(ARG_OBJECT);
 		((TextView) rootView.findViewById(R.id.case_text_description)).setText(questionEntity.getDescription());
-		 
 		return rootView;
 	}
 

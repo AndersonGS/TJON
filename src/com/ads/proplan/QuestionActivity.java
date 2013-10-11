@@ -1,18 +1,14 @@
 package com.ads.proplan;
 
-import com.googlecode.androidannotations.annotations.EActivity;
-import com.googlecode.androidannotations.annotations.EFragment;
-import com.googlecode.androidannotations.annotations.ViewById;
-
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+
 
 public class QuestionActivity extends FragmentActivity {
 
@@ -37,15 +33,9 @@ public class QuestionActivity extends FragmentActivity {
 
 	private ImageView imageView;
 
-	//@ViewById(R.id.question_bar_time)
 	private ProgressBar bar;
-
-	ImageView caseImage;
-
-	TextView caseText;
-
-	private Button buttonRespond;
-	private Button buttonSkip;
+	
+	MediaPlayer playerTime;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,19 +44,25 @@ public class QuestionActivity extends FragmentActivity {
 		
 		imageView = (ImageView) findViewById(R.id.question_image_icone);
 		bar = (ProgressBar) findViewById(R.id.question_bar_time);
-
-		caseImage = (ImageView) findViewById(R.id.case_image_arcada);
-		caseText = (TextView) findViewById(R.id.case_text_description);
 		
 		QuestionEntity questionEntity = new QuestionEntity();
 		provisorioEntidade(questionEntity);
-		
-		timeBar();
 		buildFragmentPages(questionEntity);
 		
+		preparingAudio();
+		timeBar();
+				
 		Log.i(TAG_LOG, "onCreate");
 	}
 
+	@Override
+	protected void onStop() {
+		super.onStop();
+		if (playerTime != null) {
+			playerTime.stop();
+		}
+	}
+	
 	private void provisorioEntidade(QuestionEntity questionEntity) {
 		questionEntity.setDescription("Avaliação de casos clínicos relacionados às perdas dentais em pacientes com necessidade de Prótese dentária");
 		questionEntity.setQuestion("Qual a cor do dente?");
@@ -76,15 +72,22 @@ public class QuestionActivity extends FragmentActivity {
 		questionEntity.setAlternative4("Amarelo");
 		questionEntity.setAlternativeRight("Branco");
 		questionEntity.setActivity(QuestionActivity.this);
+		Log.i(TAG_LOG, "provisorioEntidade");
 	}
 
+	/**
+	 * O metodo Time bar da classe QuestionActivity, é uma metodo void que tem o
+	 * objetivo de animar a barra do tempo.
+	 */
 	private void timeBar() {
 		new Thread(new Runnable() {
 			int mProgressStatus = 0;
-			int PROGRESS = 1;
+			int PROGRESS = 1;			
 		    Handler mHandler = new Handler();
             public void run() {
-                while (mProgressStatus < 100) {
+            	playerTime.start();    
+            	bar.setMax(60);
+                while (mProgressStatus < 60) {
                 	try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
@@ -92,22 +95,45 @@ public class QuestionActivity extends FragmentActivity {
                     mProgressStatus = mProgressStatus + PROGRESS;
                     mHandler.post(new Runnable() {
                         public void run() {
-                        	bar.setProgress(mProgressStatus);
+                        	bar.setProgress((int) mProgressStatus);
                         }
                     });
                 }
+                if (playerTime != null) {
+                	if(playerTime.isPlaying()){
+    					playerTime.stop();
+                	}
+				}
             }
         }).start();
+		Log.i(TAG_LOG, "timeBar");
 	}
 
+	private void preparingAudio() {
+		playerTime = MediaPlayer.create(this, R.raw.time_pulse);
+		playerTime.setLooping(true);
+	}
+
+	/**
+	 * O metodo Builds the fragment pages da classe QuestionActivity, é uma
+	 * metodo void que tem o objetivo de Construir os fragmentos.
+	 * 
+	 * @param questionEntity
+	 *            - O parametro question entity é do tipo Question entity.
+	 */
 	private void buildFragmentPages(QuestionEntity questionEntity) {
 		adapte = new PagesFragment(getSupportFragmentManager(), questionEntity);
 		mViewPager = (ViewPager) findViewById(R.id.pages);
 		mViewPager.setAdapter(adapte);
 		getPositionFragment();
-
+		Log.i(TAG_LOG, "buildFragmentPages");
 	}
 
+	/**
+	 * O metodo getPositionFragment da classe QuestionActivity é para esperar o
+	 * usuario mudar de tela para mudar a imagem. O objetivo desse metodo é
+	 * esperar o usuario mudar de pagina e alterar a image do icone de Swipe.
+	 */
 	private void getPositionFragment() {
 		mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 					@Override
@@ -120,6 +146,7 @@ public class QuestionActivity extends FragmentActivity {
 						}
 					}		
 				});
+		Log.i(TAG_LOG, "getPositionFragment");
 	}
 
 }

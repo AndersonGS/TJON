@@ -3,7 +3,6 @@ package com.ads.proplan;
 import java.io.Serializable;
 
 import android.app.Activity;
-import android.content.Context;
 
 public class QuestionEntity implements Serializable {
 
