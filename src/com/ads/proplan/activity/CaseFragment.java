@@ -1,4 +1,6 @@
-package com.ads.proplan;
+package com.ads.proplan.activity;
+
+import com.ads.proplan.R;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

@@ -1,7 +1,9 @@
-package com.ads.proplan;
+package com.ads.proplan.activity;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import com.ads.proplan.R;
 
 import android.app.Activity;
 import android.content.Intent;
