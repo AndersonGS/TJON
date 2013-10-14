@@ -1,5 +1,8 @@
 package com.ads.proplan.activity;
 
+import com.ads.proplan.control.QuestionControl;
+import com.ads.proplan.entity.QuestionEntity;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,11 +18,14 @@ public class PagesFragment extends FragmentStatePagerAdapter {
 	 */
 	private static final String TAG_LOG = "PagesFragment";
 
+	QuestionControl control;
+	
 	QuestionEntity questionEntity;
 	
-	public PagesFragment(FragmentManager fm, QuestionEntity questionEntity) {
+	public PagesFragment(FragmentManager fm, QuestionControl control) {
 		super(fm);	
-		this.questionEntity = questionEntity;
+		this.control = control;
+		questionEntity = control.getQuestionEntity();
 		Log.i(TAG_LOG, "PagesFragment");
 	}
 

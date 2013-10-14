@@ -1,6 +1,8 @@
 package com.ads.proplan.activity;
 
 import com.ads.proplan.R;
+import com.ads.proplan.control.QuestionControl;
+import com.ads.proplan.entity.QuestionEntity;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -38,18 +40,20 @@ public class QuestionActivity extends FragmentActivity {
 	private ProgressBar bar;
 	
 	MediaPlayer playerTime;
+
+	private QuestionControl control;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_question);
+
+		control = new QuestionControl(QuestionActivity.this);
 		
 		imageView = (ImageView) findViewById(R.id.question_image_icone);
 		bar = (ProgressBar) findViewById(R.id.question_bar_time);
-		
-		QuestionEntity questionEntity = new QuestionEntity();
-		provisorioEntidade(questionEntity);
-		buildFragmentPages(questionEntity);
+
+		buildFragmentPages();
 		
 		preparingAudio();
 		timeBar();
@@ -65,18 +69,6 @@ public class QuestionActivity extends FragmentActivity {
 		}
 	}
 	
-	private void provisorioEntidade(QuestionEntity questionEntity) {
-		questionEntity.setDescription("Avaliação de casos clínicos relacionados às perdas dentais em pacientes com necessidade de Prótese dentária");
-		questionEntity.setQuestion("Qual a cor do dente?");
-		questionEntity.setAlternative1("Branco");
-		questionEntity.setAlternative2("Verde");
-		questionEntity.setAlternative3("Rosa");
-		questionEntity.setAlternative4("Amarelo");
-		questionEntity.setAlternativeRight("Branco");
-		questionEntity.setActivity(QuestionActivity.this);
-		Log.i(TAG_LOG, "provisorioEntidade");
-	}
-
 	/**
 	 * O metodo Time bar da classe QuestionActivity, é uma metodo void que tem o
 	 * objetivo de animar a barra do tempo.
@@ -123,8 +115,8 @@ public class QuestionActivity extends FragmentActivity {
 	 * @param questionEntity
 	 *            - O parametro question entity é do tipo Question entity.
 	 */
-	private void buildFragmentPages(QuestionEntity questionEntity) {
-		adapte = new PagesFragment(getSupportFragmentManager(), questionEntity);
+	private void buildFragmentPages() {
+		adapte = new PagesFragment(getSupportFragmentManager(), control);
 		mViewPager = (ViewPager) findViewById(R.id.pages);
 		mViewPager.setAdapter(adapte);
 		getPositionFragment();

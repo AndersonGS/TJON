@@ -1,4 +1,4 @@
-package com.ads.proplan.activity;
+package com.ads.proplan.entity;
 
 import java.io.Serializable;
 
