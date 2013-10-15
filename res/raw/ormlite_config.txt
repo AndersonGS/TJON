@@ -1,0 +1,51 @@
+#
+# generated on 2013/10/15 01:42:28
+#
+# --table-start--
+dataClass=com.ads.proplan.entity.QuestionEntity
+tableName=questionentity
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=image
+canBeNull=false
+useGetSet=true
+# --field-end--
+# --field-start--
+fieldName=description
+# --field-end--
+# --field-start--
+fieldName=question
+# --field-end--
+# --field-start--
+fieldName=Alternative1
+# --field-end--
+# --field-start--
+fieldName=Alternative2
+# --field-end--
+# --field-start--
+fieldName=Alternative3
+# --field-end--
+# --field-start--
+fieldName=Alternative4
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.ads.proplan.entity.Teste
+tableName=teste
+# --table-fields-start--
+# --field-start--
+fieldName=id
+id=true
+# --field-end--
+# --field-start--
+fieldName=teste
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################

@@ -1,31 +1,25 @@
 package com.ads.proplan.db;
 
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+
 import android.content.Context;
 
 public class DatabaseManager {
 
-	static private DatabaseManager instance;
+	private DatabaseHelper databaseHelper = null;
 
-	static public void init(Context ctx) {
-		if (null==instance) {
-			instance = new DatabaseManager(ctx);
+	public DatabaseHelper getHelper(Context context) {
+		if (databaseHelper == null) {
+			databaseHelper = OpenHelperManager.getHelper(context,
+					DatabaseHelper.class);
+		}
+		return databaseHelper;
+	}
+
+	public void releaseHelper(DatabaseHelper helper) {
+		if (databaseHelper != null) {
+			OpenHelperManager.releaseHelper();
+			databaseHelper = null;
 		}
 	}
-
-	static public DatabaseManager getInstance() {
-		return instance;
-	}
-
-	private DatabaseHelper helper;
-	private DatabaseManager(Context ctx) {
-		helper = new DatabaseHelper(ctx);
-	}
-
-	private DatabaseHelper getHelper() {
-		return helper;
-	}
-
-	//TODO
-
-
 }

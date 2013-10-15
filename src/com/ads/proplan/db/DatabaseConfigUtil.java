@@ -3,6 +3,7 @@ package com.ads.proplan.db;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import com.ads.proplan.entity.QuestionEntity;
 import com.j256.ormlite.android.apptools.OrmLiteConfigUtil;
 
 /**
@@ -31,4 +32,6 @@ public class DatabaseConfigUtil extends OrmLiteConfigUtil {
 	public static void main(String[] args) throws SQLException, IOException {
 		writeConfigFile("ormlite_config.txt");
 	}
+
+//	private static final Class<?>[] classes = new Class[] { QuestionEntity.class, };
 }

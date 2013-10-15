@@ -2,20 +2,49 @@ package com.ads.proplan.entity;
 
 import java.io.Serializable;
 
+import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 import android.app.Activity;
 
+@DatabaseTable
 public class QuestionEntity implements Serializable {
 
 	private static final long serialVersionUID = -8788845661812737246L;
-
+	
+	@DatabaseField(generatedId = true)
+	int id;
+	
+	@DatabaseField(useGetSet = true, canBeNull = false)
 	private int image;
+	
+	@DatabaseField
 	private String description;
+	
+	@DatabaseField
 	private String question;
+	
+	@DatabaseField
 	private String Alternative1;
+	
+	@DatabaseField
 	private String Alternative2;
+	
+	@DatabaseField
 	private String Alternative3;
+	
+	@DatabaseField
 	private String Alternative4;
+	
+	@DatabaseField(dataType = DataType.SERIALIZABLE)
+	private Teste teste;
+	
 	private Activity activity;
+	
+	public QuestionEntity() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	public String getAlternative1() {
 		return Alternative1;
