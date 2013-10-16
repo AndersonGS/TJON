@@ -1,9 +1,9 @@
-package com.ads.proplan.db;
+package com.ads.proplan.db.config;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
-import com.ads.proplan.entity.QuestionEntity;
+import com.ads.proplan.db.entity.QuestionEntity;
 import com.j256.ormlite.android.apptools.OrmLiteConfigUtil;
 
 /**

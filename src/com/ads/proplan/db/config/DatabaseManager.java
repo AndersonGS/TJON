@@ -1,4 +1,4 @@
-package com.ads.proplan.db;
+package com.ads.proplan.db.config;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 

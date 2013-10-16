@@ -1,8 +1,8 @@
 #
-# generated on 2013/10/15 01:42:28
+# generated on 2013/10/16 03:42:06
 #
 # --table-start--
-dataClass=com.ads.proplan.entity.QuestionEntity
+dataClass=com.ads.proplan.db.entity.QuestionEntity
 tableName=questionentity
 # --table-fields-start--
 # --field-start--
@@ -11,40 +11,36 @@ generatedId=true
 # --field-end--
 # --field-start--
 fieldName=image
-canBeNull=false
+dataPersister=BYTE_ARRAY
 useGetSet=true
 # --field-end--
 # --field-start--
 fieldName=description
+useGetSet=true
 # --field-end--
 # --field-start--
 fieldName=question
+useGetSet=true
 # --field-end--
 # --field-start--
-fieldName=Alternative1
+fieldName=alternative1
+useGetSet=true
 # --field-end--
 # --field-start--
-fieldName=Alternative2
+fieldName=alternative2
+useGetSet=true
 # --field-end--
 # --field-start--
-fieldName=Alternative3
+fieldName=alternative3
+useGetSet=true
 # --field-end--
 # --field-start--
-fieldName=Alternative4
-# --field-end--
-# --table-fields-end--
-# --table-end--
-#################################
-# --table-start--
-dataClass=com.ads.proplan.entity.Teste
-tableName=teste
-# --table-fields-start--
-# --field-start--
-fieldName=id
-id=true
+fieldName=alternative4
+useGetSet=true
 # --field-end--
 # --field-start--
-fieldName=teste
+fieldName=alternativeRight
+useGetSet=true
 # --field-end--
 # --table-fields-end--
 # --table-end--

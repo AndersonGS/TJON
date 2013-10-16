@@ -2,7 +2,7 @@ package com.ads.proplan.activity;
 
 import com.ads.proplan.R;
 import com.ads.proplan.control.QuestionControl;
-import com.ads.proplan.entity.QuestionEntity;
+import com.ads.proplan.db.entity.QuestionEntity;
 
 import android.app.Activity;
 import android.content.Intent;

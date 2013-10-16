@@ -2,10 +2,11 @@ package com.ads.proplan.control;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.ads.proplan.activity.QuestionActivity;
 import com.ads.proplan.db.QuestionRepository;
-import com.ads.proplan.entity.QuestionEntity;
+import com.ads.proplan.db.entity.QuestionEntity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -27,9 +28,9 @@ public class QuestionControl{
 	private static final String TAG_LOG = "QuestionControl";
 
 	private QuestionRepository repos;
-	private ArrayList comments;
+	private ArrayList<QuestionEntity> arrayListQuestions;
 
-	private QuestionEntity questionEntity = new QuestionEntity();
+	private QuestionEntity questionEntity;
 
 	private static QuestionControl uniqueInstance;
 
@@ -43,12 +44,14 @@ public class QuestionControl{
 		return uniqueInstance;
 	}
 
-	public void setActivityContext(Activity c) {
-		this.activityContext = c;
-		provisorioEntidade();
+	public void setActivityContext(Activity activity, Context context) {
+		this.activityContext = activity;
 		//Sequencia...
-		repos = new QuestionRepository(activityContext.getApplicationContext());
-		comments = (ArrayList) repos.getAll();
+		Log.i(TAG_LOG, "setActivityContext"+context);
+		repos = new QuestionRepository(context);
+		arrayListQuestions = (ArrayList<QuestionEntity>) repos.getAll();
+		Log.i(TAG_LOG, "setActivityContext");
+		selectQuestion();
 	}
 	
 	public Activity getActivityContext() {
@@ -59,15 +62,18 @@ public class QuestionControl{
 		return questionEntity;
 	}
 
-	private void provisorioEntidade() {
-		questionEntity
-				.setDescription("Avaliação de casos clínicos relacionados às perdas dentais em pacientes com necessidade de Prótese dentária");
-		questionEntity.setQuestion("Qual a cor do dente?");
-		questionEntity.setAlternative1("Branco");
-		questionEntity.setAlternative2("Verde");
-		questionEntity.setAlternative3("Rosa");
-		questionEntity.setAlternative4("Amarelo");
-		questionEntity.setAlternativeRight("Branco");
+	private void selectQuestion() {
+		Random gerador = new Random();
+        int index = gerador.nextInt(arrayListQuestions.size());
+        questionEntity = arrayListQuestions.get(index);
+		
+//		questionEntity.setDescription("Avaliação de casos clínicos relacionados às perdas dentais em pacientes com necessidade de Prótese dentária");
+//		questionEntity.setQuestion("Qual a cor do dente?");
+//		questionEntity.setAlternative1("Branco");
+//		questionEntity.setAlternative2("Verde");
+//		questionEntity.setAlternative3("Rosa");
+//		questionEntity.setAlternative4("Amarelo");
+//		questionEntity.setAlternativeRight("Branco");
 		Log.i(TAG_LOG, "provisorioEntidade");
 	}
 

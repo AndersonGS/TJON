@@ -1,12 +1,8 @@
-package com.ads.proplan.entity;
-
-import java.io.Serializable;
+package com.ads.proplan.db.entity;
 
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-
-import android.app.Activity;
 
 @DatabaseTable
 public class QuestionEntity{
@@ -14,81 +10,79 @@ public class QuestionEntity{
 	@DatabaseField(generatedId = true)
 	int id;
 	
-	@DatabaseField(useGetSet = true, canBeNull = false)
-	private int image;
+	@DatabaseField(useGetSet = true, dataType=DataType.BYTE_ARRAY)
+	private byte[] image;
 	
-	@DatabaseField
+	@DatabaseField(useGetSet = true)
 	private String description;
 	
-	@DatabaseField
+	@DatabaseField(useGetSet = true)
 	private String question;
 	
-	@DatabaseField
-	private String Alternative1;
+	@DatabaseField(useGetSet = true)
+	private String alternative1;
 	
-	@DatabaseField
-	private String Alternative2;
+	@DatabaseField(useGetSet = true)
+	private String alternative2;
 	
-	@DatabaseField
-	private String Alternative3;
+	@DatabaseField(useGetSet = true)
+	private String alternative3;
 	
-	@DatabaseField
-	private String Alternative4;
+	@DatabaseField(useGetSet = true)
+	private String alternative4;
 	
-	@DatabaseField(dataType = DataType.SERIALIZABLE)
-	private Teste teste;
+	@DatabaseField(useGetSet = true)
+	private String alternativeRight;
 	
 	public QuestionEntity() {
 		// TODO Auto-generated constructor stub
 	}
 	
 	public String getAlternative1() {
-		return Alternative1;
+		return alternative1;
 	}
 
 	public void setAlternative1(String alternative1) {
-		Alternative1 = alternative1;
+		this.alternative1 = alternative1;
 	}
 
 	public String getAlternative2() {
-		return Alternative2;
+		return alternative2;
 	}
 
 	public void setAlternative2(String alternative2) {
-		Alternative2 = alternative2;
+		this.alternative2 = alternative2;
 	}
 
 	public String getAlternative3() {
-		return Alternative3;
+		return alternative3;
 	}
 
 	public void setAlternative3(String alternative3) {
-		Alternative3 = alternative3;
+		this.alternative3 = alternative3;
 	}
 
 	public String getAlternative4() {
-		return Alternative4;
+		return alternative4;
 	}
 
 	public void setAlternative4(String alternative4) {
-		Alternative4 = alternative4;
+		this.alternative4 = alternative4;
 	}
 
 	public String getAlternativeRight() {
-		return AlternativeRight;
+		return alternativeRight;
 	}
 
 	public void setAlternativeRight(String alternativeRight) {
-		AlternativeRight = alternativeRight;
+		alternativeRight = alternativeRight;
 	}
 
-	private String AlternativeRight;
-
-	public int getImage() {
+	public byte[] getImage() {
 		return image;
 	}
 
-	public void setImage(int image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 

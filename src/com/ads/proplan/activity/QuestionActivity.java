@@ -1,8 +1,13 @@
 package com.ads.proplan.activity;
 
+import java.sql.SQLException;
+
 import com.ads.proplan.R;
 import com.ads.proplan.control.QuestionControl;
-import com.ads.proplan.entity.QuestionEntity;
+import com.ads.proplan.db.config.DatabaseHelper;
+import com.ads.proplan.db.entity.QuestionEntity;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.RuntimeExceptionDao;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -39,7 +44,7 @@ public class QuestionActivity extends FragmentActivity {
 
 	private ProgressBar bar;
 	
-	MediaPlayer playerTime;
+	private MediaPlayer playerTime;
 
 	private QuestionControl control;
 	
@@ -49,7 +54,7 @@ public class QuestionActivity extends FragmentActivity {
 		setContentView(R.layout.activity_question);
 
 		control = QuestionControl.getInstance();
-		control.setActivityContext(QuestionActivity.this);
+		control.setActivityContext(QuestionActivity.this, this);
 		
 		imageView = (ImageView) findViewById(R.id.question_image_icone);
 		bar = (ProgressBar) findViewById(R.id.question_bar_time);
