@@ -9,9 +9,7 @@ import com.j256.ormlite.table.DatabaseTable;
 import android.app.Activity;
 
 @DatabaseTable
-public class QuestionEntity implements Serializable {
-
-	private static final long serialVersionUID = -8788845661812737246L;
+public class QuestionEntity{
 	
 	@DatabaseField(generatedId = true)
 	int id;
@@ -39,8 +37,6 @@ public class QuestionEntity implements Serializable {
 	
 	@DatabaseField(dataType = DataType.SERIALIZABLE)
 	private Teste teste;
-	
-	private Activity activity;
 	
 	public QuestionEntity() {
 		// TODO Auto-generated constructor stub
@@ -111,13 +107,5 @@ public class QuestionEntity implements Serializable {
 	public void setQuestion(String question) {
 		this.question = question;
 	}
-
-	public Activity getActivity() {
-		return activity;
-	}
-
-	public void setActivity(Activity activity) {
-		this.activity = activity;
-	}
-
+	
 }

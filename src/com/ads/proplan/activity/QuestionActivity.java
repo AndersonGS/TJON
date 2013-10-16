@@ -48,7 +48,8 @@ public class QuestionActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_question);
 
-		control = new QuestionControl(QuestionActivity.this);
+		control = QuestionControl.getInstance();
+		control.setActivityContext(QuestionActivity.this);
 		
 		imageView = (ImageView) findViewById(R.id.question_image_icone);
 		bar = (ProgressBar) findViewById(R.id.question_bar_time);
@@ -116,7 +117,7 @@ public class QuestionActivity extends FragmentActivity {
 	 *            - O parametro question entity é do tipo Question entity.
 	 */
 	private void buildFragmentPages() {
-		adapte = new PagesFragment(getSupportFragmentManager(), control);
+		adapte = new PagesFragment(getSupportFragmentManager());
 		mViewPager = (ViewPager) findViewById(R.id.pages);
 		mViewPager.setAdapter(adapte);
 		getPositionFragment();

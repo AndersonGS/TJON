@@ -11,9 +11,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
-public class QuestionControl implements Serializable {
-
-	private static final long serialVersionUID = -5980044146548289511L;
+public class QuestionControl{
 
 	/**
 	 * A variavel activity context do tipo Context foi declarada. O objetivo
@@ -33,24 +31,32 @@ public class QuestionControl implements Serializable {
 
 	private QuestionEntity questionEntity = new QuestionEntity();
 
-	public QuestionControl(Activity c) {
+	private static QuestionControl uniqueInstance;
+
+	private QuestionControl() {
+	}
+
+	public static QuestionControl getInstance() {
+		if (uniqueInstance == null){
+			uniqueInstance = new QuestionControl();
+		}
+		return uniqueInstance;
+	}
+
+	public void setActivityContext(Activity c) {
 		this.activityContext = c;
 		provisorioEntidade();
-
+		//Sequencia...
 		repos = new QuestionRepository(activityContext.getApplicationContext());
 		comments = (ArrayList) repos.getAll();
 	}
-
-	public Context getActivityContext() {
+	
+	public Activity getActivityContext() {
 		return activityContext;
 	}
 
 	public QuestionEntity getQuestionEntity() {
 		return questionEntity;
-	}
-
-	public void setQuestionEntity(QuestionEntity questionEntity) {
-		this.questionEntity = questionEntity;
 	}
 
 	private void provisorioEntidade() {
@@ -62,7 +68,6 @@ public class QuestionControl implements Serializable {
 		questionEntity.setAlternative3("Rosa");
 		questionEntity.setAlternative4("Amarelo");
 		questionEntity.setAlternativeRight("Branco");
-		questionEntity.setActivity(activityContext);
 		Log.i(TAG_LOG, "provisorioEntidade");
 	}
 

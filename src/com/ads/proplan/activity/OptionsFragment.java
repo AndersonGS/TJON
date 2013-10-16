@@ -1,6 +1,7 @@
 package com.ads.proplan.activity;
 
 import com.ads.proplan.R;
+import com.ads.proplan.control.QuestionControl;
 import com.ads.proplan.entity.QuestionEntity;
 
 import android.app.Activity;
@@ -26,6 +27,7 @@ public class OptionsFragment extends Fragment {
 	private Activity activity;
 	private QuestionEntity questionEntity ;
 	private View rootView;
+	private QuestionControl control;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,7 +35,8 @@ public class OptionsFragment extends Fragment {
 		rootView = inflater.inflate(R.layout.fragment_options, container,
 				false);
 		Bundle args = getArguments();
-		questionEntity = (QuestionEntity) args.getSerializable(ARG_OBJECT);
+		control = QuestionControl.getInstance();
+		questionEntity = control.getQuestionEntity();
 		setObject();
 		addButton();
 		return rootView;
@@ -45,7 +48,7 @@ public class OptionsFragment extends Fragment {
 		((TextView) rootView.findViewById(R.id.option_radioButton2)).setText(questionEntity.getAlternative2());
 		((TextView) rootView.findViewById(R.id.option_radioButton3)).setText(questionEntity.getAlternative3());
 		((TextView) rootView.findViewById(R.id.option_radioButton4)).setText(questionEntity.getAlternative4());
-		activity = questionEntity.getActivity();
+		activity = control.getActivityContext();
 	}
 
 	private void addButton( ) {

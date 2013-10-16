@@ -22,9 +22,9 @@ public class PagesFragment extends FragmentStatePagerAdapter {
 	
 	QuestionEntity questionEntity;
 	
-	public PagesFragment(FragmentManager fm, QuestionControl control) {
+	public PagesFragment(FragmentManager fm) {
 		super(fm);	
-		this.control = control;
+		this.control = QuestionControl.getInstance();
 		questionEntity = control.getQuestionEntity();
 		Log.i(TAG_LOG, "PagesFragment");
 	}
@@ -37,13 +37,13 @@ public class PagesFragment extends FragmentStatePagerAdapter {
 		case 0:
 			fragment = new CaseFragment();
 			args = new Bundle();
-			args.putSerializable(CaseFragment.ARG_OBJECT, questionEntity);
+			//args.putSerializable(CaseFragment.ARG_OBJECT, questionEntity);
 			fragment.setArguments(args);
 			break;
 		case 1:
 			fragment = new OptionsFragment();
 			args = new Bundle();
-			args.putSerializable(CaseFragment.ARG_OBJECT, questionEntity);
+			//args.putSerializable(CaseFragment.ARG_OBJECT, questionEntity);
 			fragment.setArguments(args);
 			break;
 		default:
