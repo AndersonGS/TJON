@@ -1,5 +1,5 @@
 #
-# generated on 2013/10/16 03:42:06
+# generated on 2013/10/17 12:58:39
 #
 # --table-start--
 dataClass=com.ads.proplan.db.entity.QuestionEntity
@@ -11,7 +11,6 @@ generatedId=true
 # --field-end--
 # --field-start--
 fieldName=image
-dataPersister=BYTE_ARRAY
 useGetSet=true
 # --field-end--
 # --field-start--

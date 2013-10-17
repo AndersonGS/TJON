@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.QuestionActivity"></activity>
+        <activity android:name=".activity.ResultActivity"></activity>
 
     </application>
 

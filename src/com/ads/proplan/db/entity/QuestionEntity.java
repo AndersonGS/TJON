@@ -8,10 +8,10 @@ import com.j256.ormlite.table.DatabaseTable;
 public class QuestionEntity{
 	
 	@DatabaseField(generatedId = true)
-	int id;
+	public int id;
 	
-	@DatabaseField(useGetSet = true, dataType=DataType.BYTE_ARRAY)
-	private byte[] image;
+	@DatabaseField(useGetSet = true)
+	private String image;
 	
 	@DatabaseField(useGetSet = true)
 	private String description;
@@ -75,14 +75,14 @@ public class QuestionEntity{
 	}
 
 	public void setAlternativeRight(String alternativeRight) {
-		alternativeRight = alternativeRight;
+		this.alternativeRight = alternativeRight;
 	}
 
-	public byte[] getImage() {
+	public String getImage() {
 		return image;
 	}
 
-	public void setImage(byte[] image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 

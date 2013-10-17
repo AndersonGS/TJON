@@ -9,6 +9,7 @@ import com.ads.proplan.db.entity.QuestionEntity;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -44,6 +45,8 @@ public class QuestionActivity extends FragmentActivity {
 
 	private ProgressBar bar;
 	
+	private boolean statusBar;
+	
 	private MediaPlayer playerTime;
 
 	private QuestionControl control;
@@ -70,6 +73,7 @@ public class QuestionActivity extends FragmentActivity {
 	@Override
 	protected void onStop() {
 		super.onStop();
+		statusBar = false;
 		if (playerTime != null) {
 			playerTime.stop();
 		}
@@ -81,30 +85,44 @@ public class QuestionActivity extends FragmentActivity {
 	 */
 	private void timeBar() {
 		new Thread(new Runnable() {
-			int mProgressStatus = 0;
+			
+			int mProgressStatus = control.getPreferencesBar();
 			int PROGRESS = 1;			
 		    Handler mHandler = new Handler();
-            public void run() {
-            	playerTime.start();    
-            	bar.setMax(60);
-                while (mProgressStatus < 60) {
-                	try {
+
+			public void run() {
+				statusBar = true;
+				playerTime.start();
+				bar.setMax(60);
+				while (mProgressStatus < 60 && statusBar) {
+					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
 					}
-                    mProgressStatus = mProgressStatus + PROGRESS;
-                    mHandler.post(new Runnable() {
-                        public void run() {
-                        	bar.setProgress((int) mProgressStatus);
-                        }
-                    });
-                }
-                if (playerTime != null) {
-                	if(playerTime.isPlaying()){
-    					playerTime.stop();
-                	}
+					mProgressStatus = mProgressStatus + PROGRESS;
+					mHandler.post(new Runnable() {
+						public void run() {
+							bar.setProgress((int) mProgressStatus);
+							control.setPreferencesBar(mProgressStatus);
+						}
+					});
 				}
-            }
+				if (playerTime != null) {
+					if (playerTime.isPlaying()) {
+						playerTime.stop();
+					}
+				}
+				if (mProgressStatus >= 60) {
+					control.setPreferencesBar(0);
+					control.setQuestionResult(false);
+					Intent intent = new Intent();
+					intent.setClass(QuestionActivity.this,
+							ResultActivity.class);
+					startActivity(intent);
+					finish();
+				}
+
+			}
         }).start();
 		Log.i(TAG_LOG, "timeBar");
 	}

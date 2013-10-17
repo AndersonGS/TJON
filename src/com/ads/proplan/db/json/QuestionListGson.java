@@ -1,6 +1,8 @@
-package com.ads.proplan.db.entity;
+package com.ads.proplan.db.json;
 
 import java.util.List;
+
+import com.ads.proplan.db.entity.QuestionEntity;
 
 public class QuestionListGson {
 	private List<QuestionEntity> questionEntities;
