@@ -2,6 +2,8 @@ package com.ads.proplan.control;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 import com.ads.proplan.activity.QuestionActivity;
@@ -27,22 +29,18 @@ public class QuestionControl {
 	 * classe.
 	 */
 	private static final String TAG_LOG = "QuestionControl";
-
 	private String TAG_PREF = "QuestionControl";
 	private String TAG_PREF_BAR = "BAR";
 	private String TAG_PREF_QUESTION = "QUESTION";
-
+	
 	private QuestionRepository repos;
 	private ArrayList<QuestionEntity> arrayListQuestions;
-
 	private QuestionEntity questionEntity;
-
-	private static QuestionControl uniqueInstance;
-
 	private boolean questionResult;
-
 	private SharedPreferences preferences;
 
+	private static QuestionControl uniqueInstance;
+	
 	private QuestionControl() {
 	}
 
@@ -56,12 +54,29 @@ public class QuestionControl {
 	public void setActivityContext(Activity activity, Context context) {
 		this.activityContext = activity;
 		// Sequencia...
-		Log.i(TAG_LOG, "setActivityContext" + context);
-		repos = new QuestionRepository(context);
-		arrayListQuestions = (ArrayList<QuestionEntity>) repos.getAll();
-		preferences = context.getSharedPreferences(TAG_PREF, 0);
+		getListQuestionDb(context);
+		getPreferences(context);
 		selectQuestion();
 		Log.i(TAG_LOG, "setActivityContext");
+	}
+
+	private void getPreferences(Context context) {
+		if(preferences == null){
+		preferences = context.getSharedPreferences(TAG_PREF, 0);
+		}
+	}
+
+	private void getListQuestionDb(Context context) {
+		if (repos == null) {
+			repos = new QuestionRepository(context);
+			arrayListQuestions = (ArrayList<QuestionEntity>) repos.getAll();
+			mixList(arrayListQuestions);
+		}
+	}
+
+	private void mixList(List lista) {
+		long seed = System.nanoTime();
+		Collections.shuffle(lista, new Random(seed));
 	}
 
 	public Activity getActivityContext() {
@@ -82,6 +97,7 @@ public class QuestionControl {
 			if (lista.length >= arrayListQuestions.size()) {
 				repetido = false;
 				preferencesQuestionClean();
+				mixList(arrayListQuestions);
 			}
 			int index = gerador.nextInt(arrayListQuestions.size());
 			questionEntity = arrayListQuestions.get(index);
@@ -96,14 +112,6 @@ public class QuestionControl {
 				repetido = false;
 			}
 		}
-
-		// questionEntity.setDescription("Avaliação de casos clínicos relacionados às perdas dentais em pacientes com necessidade de Prótese dentária");
-		// questionEntity.setQuestion("Qual a cor do dente?");
-		// questionEntity.setAlternative1("Branco");
-		// questionEntity.setAlternative2("Verde");
-		// questionEntity.setAlternative3("Rosa");
-		// questionEntity.setAlternative4("Amarelo");
-		// questionEntity.setAlternativeRight("Branco");
 		Log.i(TAG_LOG, "provisorioEntidade");
 	}
 
@@ -161,4 +169,7 @@ public class QuestionControl {
 		editor.commit();
 	}
 
+	public void runOnStop() {
+		//TODO
+	}
 }

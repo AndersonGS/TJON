@@ -88,10 +88,12 @@ public class OptionsFragment extends Fragment {
 		((Button) rootView.findViewById(R.id.option_button_skip)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				if(control.getPreferencesBar() < 59){
 				Intent intent = new Intent();
 				intent.setClass(activity, QuestionActivity.class);
 				startActivity(intent);
 				activity.finish();
+				}
 			}
 		});
 	}
@@ -101,14 +103,16 @@ public class OptionsFragment extends Fragment {
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						radioGroup = (RadioGroup) rootView.findViewById(R.id.option_radiongroup_option);
-						selectedId = radioGroup.getCheckedRadioButtonId();
-						if(selectedId != -1){
-						verifyCorrectAlternative();
-						Intent intent = new Intent();
-						intent.setClass(activity, ResultActivity.class);
-						startActivity(intent);
-						activity.finish();
+						if(control.getPreferencesBar() < 59){
+							radioGroup = (RadioGroup) rootView.findViewById(R.id.option_radiongroup_option);
+							selectedId = radioGroup.getCheckedRadioButtonId();
+							if(selectedId != -1){
+								verifyCorrectAlternative();
+								Intent intent = new Intent();
+								intent.setClass(activity, ResultActivity.class);
+								startActivity(intent);
+								activity.finish();
+							}
 						}
 					}
 				});

@@ -61,22 +61,31 @@ public class QuestionActivity extends FragmentActivity {
 		
 		imageView = (ImageView) findViewById(R.id.question_image_icone);
 		bar = (ProgressBar) findViewById(R.id.question_bar_time);
-
-		buildFragmentPages();
 		
+		bar.setMax(60);
+		bar.setProgress((int) control.getPreferencesBar());
 		preparingAudio();
 		timeBar();
-				
+		
+		buildFragmentPages();	
 		Log.i(TAG_LOG, "onCreate");
 	}
 
 	@Override
 	protected void onStop() {
 		super.onStop();
+		control.setQuestionResult(false);
 		statusBar = false;
 		if (playerTime != null) {
 			playerTime.stop();
 		}
+	}
+	
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		preparingAudio();
+		timeBar();
 	}
 	
 	/**
@@ -85,7 +94,6 @@ public class QuestionActivity extends FragmentActivity {
 	 */
 	private void timeBar() {
 		new Thread(new Runnable() {
-			
 			int mProgressStatus = control.getPreferencesBar();
 			int PROGRESS = 1;			
 		    Handler mHandler = new Handler();
@@ -93,7 +101,6 @@ public class QuestionActivity extends FragmentActivity {
 			public void run() {
 				statusBar = true;
 				playerTime.start();
-				bar.setMax(60);
 				while (mProgressStatus < 60 && statusBar) {
 					try {
 						Thread.sleep(1000);
