@@ -33,7 +33,7 @@ public class QuestionControl {
 	private String TAG_PREF_BAR = "BAR";
 	private String TAG_PREF_QUESTION = "QUESTION";
 	
-	private final int barMaxSize = 10;
+	private final int barMaxSize = 60;
 	
 	private QuestionRepository repos;
 	private ArrayList<QuestionEntity> arrayListQuestions;

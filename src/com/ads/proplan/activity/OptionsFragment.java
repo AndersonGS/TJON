@@ -110,7 +110,7 @@ public class OptionsFragment extends Fragment {
 							if(selectedId != -1){
 								verifyCorrectAlternative();
 								Intent intent = new Intent();
-								intent.setClass(activity, ResultActivity.class);
+								intent.setClass(activity, ResultsActivity_.class);
 								startActivity(intent);
 								activity.finish();
 							}

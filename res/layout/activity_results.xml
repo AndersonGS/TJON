@@ -4,11 +4,63 @@
     android:layout_height="match_parent" >
 
     <ImageView
-        android:id="@+id/result_image_like"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:id="@+id/results_image_doctor"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:src="@raw/doctor" />
+
+    <ImageView
+        android:id="@+id/results_image_balao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:src="@raw/balao" />
+
+    <Button
+        android:id="@+id/results_button_cotinuar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginRight="30dp"
+        android:text="Continuar" />
+
+    <ImageView
+        android:id="@+id/results_image_like"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/results_image_balao"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="150dp"
         android:src="@raw/like" />
+
+    <TextView
+        android:id="@+id/results_text_like"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/results_image_like"
+        android:layout_alignTop="@+id/results_image_like"
+        android:layout_marginRight="40dp"
+        android:layout_toRightOf="@+id/results_image_like"
+        android:gravity="center_vertical"
+        android:text="Bom Trabalho"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/results_text_descricao"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignLeft="@+id/results_image_like"
+        android:layout_below="@+id/results_image_like"
+        android:layout_marginBottom="250dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="TextView" />
 
 </RelativeLayout>
