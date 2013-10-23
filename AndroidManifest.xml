@@ -24,6 +24,8 @@
         </activity>
         <activity android:name=".activity.QuestionActivity"></activity>
         <activity android:name=".activity.ResultActivity"></activity>
+        <activity android:name=".activity.JumpActivity_"></activity>
+        <activity android:name=".activity.EndGameActivity_"></activity>
 
     </application>
 

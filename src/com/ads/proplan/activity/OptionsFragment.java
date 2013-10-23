@@ -88,9 +88,10 @@ public class OptionsFragment extends Fragment {
 		((Button) rootView.findViewById(R.id.option_button_skip)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if(control.getPreferencesBar() < 59){
+				if(control.getPreferencesBar() < (control.getBarMaxSize()-1)){
+				control.setStatusBar(false);
 				Intent intent = new Intent();
-				intent.setClass(activity, QuestionActivity.class);
+				intent.setClass(activity, JumpActivity_.class);
 				startActivity(intent);
 				activity.finish();
 				}
@@ -103,7 +104,7 @@ public class OptionsFragment extends Fragment {
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						if(control.getPreferencesBar() < 59){
+						if(control.getPreferencesBar() < (control.getBarMaxSize()-1)){
 							radioGroup = (RadioGroup) rootView.findViewById(R.id.option_radiongroup_option);
 							selectedId = radioGroup.getCheckedRadioButtonId();
 							if(selectedId != -1){

@@ -9,6 +9,7 @@ import com.ads.proplan.control.QuestionControl;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.ImageView;
 
 public class ResultActivity extends Activity {
@@ -36,7 +37,6 @@ public class ResultActivity extends Activity {
 	
 	private void timeSplash(int time) {
 		new Timer().schedule(new TimerTask() {
-
 			@Override
 			public void run() {
 				Intent intent = new Intent();

@@ -33,17 +33,30 @@ public class QuestionControl {
 	private String TAG_PREF_BAR = "BAR";
 	private String TAG_PREF_QUESTION = "QUESTION";
 	
+	private final int barMaxSize = 10;
+	
 	private QuestionRepository repos;
 	private ArrayList<QuestionEntity> arrayListQuestions;
 	private QuestionEntity questionEntity;
+
+	/**
+	 * A variavel question result do tipo Boolean foi declarada. O objetivo
+	 * dessa variavel é determinar o fim da questão, e é usado para determinar o
+	 * fim da musica e do progresso da barra.
+	 */
+	private boolean statusBar;
+	
 	private boolean questionResult;
+	
+	/**
+	 * A variavel preferences do tipo SharedPreferences foi declarada. O
+	 * objetivo dessa variavel é pegar a istancia do SharedPreferences para
+	 * resgatar as preferencias salvas.
+	 */
 	private SharedPreferences preferences;
 
 	private static QuestionControl uniqueInstance;
-	
-	private QuestionControl() {
-	}
-
+	private QuestionControl() {	}
 	public static QuestionControl getInstance() {
 		if (uniqueInstance == null) {
 			uniqueInstance = new QuestionControl();
@@ -54,9 +67,11 @@ public class QuestionControl {
 	public void setActivityContext(Activity activity, Context context) {
 		this.activityContext = activity;
 		// Sequencia...
+		setStatusBar(true);
 		getListQuestionDb(context);
 		getPreferences(context);
 		selectQuestion();
+		
 		Log.i(TAG_LOG, "setActivityContext");
 	}
 
@@ -149,7 +164,6 @@ public class QuestionControl {
 					results[i] = Integer.parseInt(items[i]);
 				} catch (NumberFormatException nfe) {
 				}
-				;
 			}
 		}
 		return results;
@@ -171,5 +185,15 @@ public class QuestionControl {
 
 	public void runOnStop() {
 		//TODO
+	}
+	
+	public int getBarMaxSize() {
+		return barMaxSize;
+	}
+	public boolean isStatusBar() {
+		return statusBar;
+	}
+	public void setStatusBar(boolean statusBar) {
+		this.statusBar = statusBar;
 	}
 }

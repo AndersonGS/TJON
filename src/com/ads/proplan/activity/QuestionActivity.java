@@ -45,7 +45,6 @@ public class QuestionActivity extends FragmentActivity {
 
 	private ProgressBar bar;
 	
-	private boolean statusBar;
 	
 	private MediaPlayer playerTime;
 
@@ -62,7 +61,7 @@ public class QuestionActivity extends FragmentActivity {
 		imageView = (ImageView) findViewById(R.id.question_image_icone);
 		bar = (ProgressBar) findViewById(R.id.question_bar_time);
 		
-		bar.setMax(60);
+		bar.setMax(control.getBarMaxSize());
 		bar.setProgress((int) control.getPreferencesBar());
 		preparingAudio();
 		timeBar();
@@ -72,10 +71,9 @@ public class QuestionActivity extends FragmentActivity {
 	}
 
 	@Override
-	protected void onStop() {
-		super.onStop();
-		control.setQuestionResult(false);
-		statusBar = false;
+	protected void onPause() {
+		super.onPause();
+		control.setStatusBar(false);
 		if (playerTime != null) {
 			playerTime.stop();
 		}
@@ -83,9 +81,10 @@ public class QuestionActivity extends FragmentActivity {
 	
 	@Override
 	protected void onRestart() {
-		super.onRestart();
-		preparingAudio();
-		timeBar();
+			super.onRestart();
+			preparingAudio();
+			control.setStatusBar(true);
+			timeBar();
 	}
 	
 	/**
@@ -99,9 +98,8 @@ public class QuestionActivity extends FragmentActivity {
 		    Handler mHandler = new Handler();
 
 			public void run() {
-				statusBar = true;
 				playerTime.start();
-				while (mProgressStatus < 60 && statusBar) {
+				while (mProgressStatus < control.getBarMaxSize() && control.isStatusBar()) {
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
@@ -119,16 +117,13 @@ public class QuestionActivity extends FragmentActivity {
 						playerTime.stop();
 					}
 				}
-				if (mProgressStatus >= 60) {
+				if (mProgressStatus >= control.getBarMaxSize()) {
 					control.setPreferencesBar(0);
-					control.setQuestionResult(false);
 					Intent intent = new Intent();
-					intent.setClass(QuestionActivity.this,
-							ResultActivity.class);
-					startActivity(intent);
+					intent.setClass(QuestionActivity.this,EndGameActivity_.class);
+					startActivity(intent);	
 					finish();
 				}
-
 			}
         }).start();
 		Log.i(TAG_LOG, "timeBar");
