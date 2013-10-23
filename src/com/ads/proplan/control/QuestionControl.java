@@ -1,19 +1,17 @@
 package com.ads.proplan.control;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import com.ads.proplan.activity.QuestionActivity;
-import com.ads.proplan.db.QuestionRepository;
-import com.ads.proplan.db.entity.QuestionEntity;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
+
+import com.ads.proplan.db.QuestionRepository;
+import com.ads.proplan.db.entity.QuestionEntity;
 
 public class QuestionControl {
 
@@ -31,7 +29,28 @@ public class QuestionControl {
 	private static final String TAG_LOG = "QuestionControl";
 	private String TAG_PREF = "QuestionControl";
 	private String TAG_PREF_BAR = "BAR";
-	private String TAG_PREF_QUESTION = "QUESTION";
+
+	private int [] listQuestionResolved;
+	
+	/**
+	 * A variavel jump number do tipo Int foi declarada. O objetivo dessa
+	 * variavel é para guardar o numero de pulo como variavel local.
+	 */
+	private int jumpNumber = 3;
+
+	/**
+	 * A variavel question number do tipo Int foi declarada. O objetivo dessa
+	 * variavel é guardar o numero de questões resolvidas como variavel local.
+	 */
+	private int questionNumber = 0;
+	
+	/**
+	 * A variavel question correct number do tipo Int foi declarada. O objetivo
+	 * dessa variavel é guardar o numero de questões corretas.
+	 */
+	private int questionCorrectNumber = 0;
+	
+	private int lifeNumber = 0;
 	
 	private final int barMaxSize = 60;
 	
@@ -94,14 +113,6 @@ public class QuestionControl {
 		Collections.shuffle(lista, new Random(seed));
 	}
 
-	public Activity getActivityContext() {
-		return activityContext;
-	}
-
-	public QuestionEntity getQuestionEntity() {
-		return questionEntity;
-	}
-
 	private void selectQuestion() {
 		boolean repetido = true;
 		Random gerador = new Random();
@@ -109,11 +120,16 @@ public class QuestionControl {
 		
 		while (repetido) {
 			int cont = 0;
-			if (lista.length >= arrayListQuestions.size()) {
-				repetido = false;
+			for (int i : lista) {
+				if(i != 0){
+					cont++;
+				}
+			}
+			if (lista.length == cont) {
 				preferencesQuestionClean();
 				mixList(arrayListQuestions);
 			}
+			cont = 0;
 			int index = gerador.nextInt(arrayListQuestions.size());
 			questionEntity = arrayListQuestions.get(index);
 			for (int i : lista) {
@@ -123,21 +139,12 @@ public class QuestionControl {
 			}
 			if (cont == 0) {
 				setPreferencesQuestion(questionEntity.id);
-				Log.i(TAG_LOG, "provisorioEntidade" + questionEntity.id);
 				repetido = false;
 			}
 		}
 		Log.i(TAG_LOG, "provisorioEntidade");
 	}
-
-	public boolean isQuestionResult() {
-		return questionResult;
-	}
-
-	public void setQuestionResult(boolean questionResult) {
-		this.questionResult = questionResult;
-	}
-
+	
 	public int getPreferencesBar() {
 		int value = 0;
 		if (preferences.contains(TAG_PREF_BAR)) {
@@ -153,40 +160,51 @@ public class QuestionControl {
 	}
 
 	public int[] getPreferencesQuestion() {
-		String value = "";
-		int[] results = new int[1];
-		if (preferences.contains(TAG_PREF_QUESTION)) {
-			value = preferences.getString(TAG_PREF_QUESTION, "");
-			String[] items = value.split(",");
-			results = new int[items.length];
-			for (int i = 0; i < items.length; i++) {
-				try {
-					results[i] = Integer.parseInt(items[i]);
-				} catch (NumberFormatException nfe) {
-				}
-			}
+		if (listQuestionResolved == null) {
+			listQuestionResolved = new int[arrayListQuestions.size()];
 		}
-		return results;
+		return listQuestionResolved;
 	}
 
 	public void setPreferencesQuestion(int value) {
-		String text = preferences.getString(TAG_PREF_QUESTION, "");
-		text = (text + "," + value);
-		SharedPreferences.Editor editor = preferences.edit();
-		editor.putString(TAG_PREF_QUESTION, text);
-		editor.commit();
+		if (listQuestionResolved == null) {
+			listQuestionResolved = new int[arrayListQuestions.size()];
+		}
+		for (int j = 0; j < listQuestionResolved.length; j++) {
+			if(listQuestionResolved[j] == 0){
+				listQuestionResolved[j] = value;
+				break;
+			}
+		}
 	}
 	
 	public void preferencesQuestionClean() {
-		SharedPreferences.Editor editor = preferences.edit();
-		editor.putString(TAG_PREF_QUESTION, "");
-		editor.commit();
-	}
-
-	public void runOnStop() {
-		//TODO
+		if (listQuestionResolved == null) {
+			listQuestionResolved = new int[arrayListQuestions.size()];
+		}
+		for (int i = 0; i < listQuestionResolved.length; i++) {
+			listQuestionResolved[i] = 0;
+		}
 	}
 	
+	public void restartControl(){
+		jumpNumber = 3;
+		lifeNumber = 0;
+		setPreferencesBar(0);
+	}
+	
+	public Activity getActivityContext() {
+		return activityContext;
+	}
+	public QuestionEntity getQuestionEntity() {
+		return questionEntity;
+	}
+	public boolean isQuestionResult() {
+		return questionResult;
+	}
+	public void setQuestionResult(boolean questionResult) {
+		this.questionResult = questionResult;
+	}
 	public int getBarMaxSize() {
 		return barMaxSize;
 	}
@@ -196,4 +214,29 @@ public class QuestionControl {
 	public void setStatusBar(boolean statusBar) {
 		this.statusBar = statusBar;
 	}
+	public int getQuestionNumber() {
+		return questionNumber;
+	}
+	public void setQuestionNumber(int questionNumber) {
+		this.questionNumber = questionNumber;
+	}
+	public int getJumpNumber() {
+		return jumpNumber;
+	}
+	public void setJumpNumber(int jumpNumber) {
+		this.jumpNumber = jumpNumber;
+	}
+	public int getQuestionCorrectNumber() {
+		return questionCorrectNumber;
+	}
+	public void setQuestionCorrectNumber(int questionCorrectNumber) {
+		this.questionCorrectNumber = questionCorrectNumber;
+	}
+	public int getLifeNumber() {
+		return lifeNumber;
+	}
+	public void setLifeNumber(int lifeNumber) {
+		this.lifeNumber = lifeNumber;
+	}
+	
 }

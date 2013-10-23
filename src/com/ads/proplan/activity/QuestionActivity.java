@@ -118,7 +118,7 @@ public class QuestionActivity extends FragmentActivity {
 					}
 				}
 				if (mProgressStatus >= control.getBarMaxSize()) {
-					control.setPreferencesBar(0);
+					//control.setPreferencesBar(0);
 					Intent intent = new Intent();
 					intent.setClass(QuestionActivity.this,EndGameActivity_.class);
 					startActivity(intent);	

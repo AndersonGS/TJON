@@ -1,6 +1,7 @@
 package com.ads.proplan.activity;
 
 import com.ads.proplan.R;
+import com.ads.proplan.control.QuestionControl;
 import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.UiThread;
 import com.googlecode.androidannotations.annotations.ViewById;
@@ -15,17 +16,19 @@ public class JumpActivity extends Activity {
 
 	@ViewById(R.id.jump_text_descricao)
 	public TextView descricaoTextView;
+	
+	private QuestionControl control;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		control = QuestionControl.getInstance();
 	}
 
 	@Override
 	protected void onStart() {
 		super.onStart();
-		descricaoTextView.setText("Você Tem 2 Pulos!");
+		descricaoTextView.setText("Você Tem "+control.getJumpNumber()+" Pulos!");
 	}
 
 	@Override

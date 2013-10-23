@@ -68,6 +68,7 @@ public class OptionsFragment extends Fragment {
 		((TextView) rootView.findViewById(R.id.option_radioButton2)).setText(fileList.get(1));
 		((TextView) rootView.findViewById(R.id.option_radioButton3)).setText(fileList.get(2));
 		((TextView) rootView.findViewById(R.id.option_radioButton4)).setText(fileList.get(3));
+		((Button) rootView.findViewById(R.id.option_button_skip)).setText("Pular("+control.getJumpNumber()+")");
 		activity = control.getActivityContext();
 	}
 
@@ -85,11 +86,13 @@ public class OptionsFragment extends Fragment {
 	}
 
 	private void ActionButtonSkip( ) {
+		if(control.getJumpNumber() != 0){
 		((Button) rootView.findViewById(R.id.option_button_skip)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if(control.getPreferencesBar() < (control.getBarMaxSize()-1)){
 				control.setStatusBar(false);
+				control.setJumpNumber(control.getJumpNumber()-1);
 				Intent intent = new Intent();
 				intent.setClass(activity, JumpActivity_.class);
 				startActivity(intent);
@@ -97,6 +100,9 @@ public class OptionsFragment extends Fragment {
 				}
 			}
 		});
+		}else{
+			((Button) rootView.findViewById(R.id.option_button_skip)).setEnabled(false);
+		}
 	}
 
 	private void ActionButtonRespond() {
@@ -121,11 +127,18 @@ public class OptionsFragment extends Fragment {
 
 	private void verifyCorrectAlternative() {
 		Log.i(TAG_LOG, "verifyCorrectAlternative");
-
-		RadioButton radioButton = (RadioButton) rootView.findViewById(selectedId);
-		if(questionEntity.getAlternativeRight().equalsIgnoreCase(""+radioButton.getText())){
+		control.setQuestionNumber(control.getQuestionNumber() + 1);
+		RadioButton radioButton = (RadioButton) rootView
+				.findViewById(selectedId);
+		if (questionEntity.getAlternativeRight().equalsIgnoreCase(
+				"" + radioButton.getText())) {
 			control.setQuestionResult(true);
-		}else{
+			control.setQuestionCorrectNumber(control.getQuestionCorrectNumber() + 1);
+			if (control.getLifeNumber() > 0) {
+				control.setLifeNumber(control.getLifeNumber() - 1);
+			}
+		} else {
+			control.setLifeNumber(control.getLifeNumber() + 1);
 			control.setQuestionResult(false);
 		}
 	}

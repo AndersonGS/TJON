@@ -59,8 +59,34 @@
         android:layout_below="@+id/results_image_like"
         android:layout_marginBottom="250dp"
         android:layout_marginRight="40dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="-5dp"
         android:gravity="center"
         android:text="TextView" />
+
+    <ImageView
+        android:id="@+id/results_image_dislike1"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@raw/like" />
+
+        <ImageView
+            android:id="@+id/results_image_dislike2"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:src="@raw/like" />
+        
+    <ImageView
+        android:id="@+id/results_image_dislike3"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:src="@raw/like" />
+
+
 
 </RelativeLayout>
