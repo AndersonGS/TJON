@@ -1,6 +1,181 @@
 #
-# generated on 2013/10/17 12:58:39
+# generated on 2013/10/24 11:14:31
 #
+# --table-start--
+dataClass=com.ads.proplan.db.entity.Cenario
+tableName=cenario
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=fase
+foreign=true
+foreignAutoRefresh=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.ads.proplan.db.entity.Fase
+tableName=fase
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=description
+useGetSet=true
+# --field-end--
+# --field-start--
+fieldName=trofeu
+foreign=true
+foreignAutoRefresh=true
+# --field-end--
+# --field-start--
+fieldName=cenarios
+foreignCollection=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.ads.proplan.db.entity.Jogador
+tableName=jogador
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=vidas
+useGetSet=true
+# --field-end--
+# --field-start--
+fieldName=nickName
+useGetSet=true
+# --field-end--
+# --field-start--
+fieldName=pulos
+useGetSet=true
+# --field-end--
+# --field-start--
+fieldName=pontos
+useGetSet=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.ads.proplan.db.entity.Jogo
+tableName=jogo
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=midia
+foreignCollection=true
+# --field-end--
+# --field-start--
+fieldName=descricao
+useGetSet=true
+# --field-end--
+# --field-start--
+fieldName=titulo
+useGetSet=true
+# --field-end--
+# --field-start--
+fieldName=sobre
+useGetSet=true
+# --field-end--
+# --field-start--
+fieldName=versao
+useGetSet=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.ads.proplan.db.entity.Midia
+tableName=midia
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=jogo
+foreign=true
+foreignAutoRefresh=true
+# --field-end--
+# --field-start--
+fieldName=cenario
+foreign=true
+foreignAutoRefresh=true
+# --field-end--
+# --field-start--
+fieldName=fase
+foreign=true
+foreignAutoRefresh=true
+# --field-end--
+# --field-start--
+fieldName=texto
+useGetSet=true
+# --field-end--
+# --field-start--
+fieldName=caminho
+useGetSet=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.ads.proplan.db.entity.Pergunta
+tableName=pergunta
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=image
+useGetSet=true
+# --field-end--
+# --field-start--
+fieldName=description
+useGetSet=true
+# --field-end--
+# --field-start--
+fieldName=question
+useGetSet=true
+# --field-end--
+# --field-start--
+fieldName=alternative1
+useGetSet=true
+# --field-end--
+# --field-start--
+fieldName=alternative2
+useGetSet=true
+# --field-end--
+# --field-start--
+fieldName=alternative3
+useGetSet=true
+# --field-end--
+# --field-start--
+fieldName=alternative4
+useGetSet=true
+# --field-end--
+# --field-start--
+fieldName=alternativeRight
+useGetSet=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
 # --table-start--
 dataClass=com.ads.proplan.db.entity.QuestionEntity
 tableName=questionentity
@@ -39,6 +214,131 @@ useGetSet=true
 # --field-end--
 # --field-start--
 fieldName=alternativeRight
+useGetSet=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.ads.proplan.db.entity.Sessao
+tableName=sessao
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=jogador
+foreign=true
+foreignAutoRefresh=true
+# --field-end--
+# --field-start--
+fieldName=perguntas
+foreignCollection=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.ads.proplan.db.entity.SessaoPergunta
+tableName=sessaopergunta
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=pergunta
+foreign=true
+foreignAutoRefresh=true
+# --field-end--
+# --field-start--
+fieldName=isAcerto
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=tempoResolucao
+generatedId=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.ads.proplan.db.entity.Trofeu
+tableName=trofeu
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=jogador
+foreign=true
+foreignAutoRefresh=true
+# --field-end--
+# --field-start--
+fieldName=fase
+foreign=true
+foreignAutoRefresh=true
+# --field-end--
+# --field-start--
+fieldName=nome
+useGetSet=true
+# --field-end--
+# --field-start--
+fieldName=aproveitamentoMin
+useGetSet=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.ads.proplan.db.entity.Tutorial
+tableName=tutorial
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=jogo
+foreign=true
+foreignAutoRefresh=true
+# --field-end--
+# --field-start--
+fieldName=midias
+foreignCollection=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.ads.proplan.db.entity.Usuario
+tableName=usuario
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=jogador
+foreign=true
+foreignAutoRefresh=true
+# --field-end--
+# --field-start--
+fieldName=email
+useGetSet=true
+# --field-end--
+# --field-start--
+fieldName=senha
+useGetSet=true
+# --field-end--
+# --field-start--
+fieldName=cdPrivilegio
+useGetSet=true
+# --field-end--
+# --field-start--
+fieldName=dtCadastro
 useGetSet=true
 # --field-end--
 # --table-fields-end--

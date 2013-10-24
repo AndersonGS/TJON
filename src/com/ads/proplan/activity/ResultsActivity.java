@@ -75,4 +75,11 @@ public class ResultsActivity extends Activity {
 		startActivity(intent);
 		finish();
 	}
+	
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		control.closeControl();
+	}
+
 }

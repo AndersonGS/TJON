@@ -10,7 +10,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.ads.proplan.db.JogadorRepository;
 import com.ads.proplan.db.QuestionRepository;
+import com.ads.proplan.db.entity.Jogador;
 import com.ads.proplan.db.entity.QuestionEntity;
 
 public class QuestionControl {
@@ -36,7 +38,7 @@ public class QuestionControl {
 	 * A variavel jump number do tipo Int foi declarada. O objetivo dessa
 	 * variavel é para guardar o numero de pulo como variavel local.
 	 */
-	private int jumpNumber = 3;
+	private int jumpNumber;
 
 	/**
 	 * A variavel question number do tipo Int foi declarada. O objetivo dessa
@@ -50,14 +52,17 @@ public class QuestionControl {
 	 */
 	private int questionCorrectNumber = 0;
 	
-	private int lifeNumber = 0;
+	private int lifeNumber;
 	
 	private final int barMaxSize = 60;
 	
-	private QuestionRepository repos;
+	private QuestionRepository questionRepos;
 	private ArrayList<QuestionEntity> arrayListQuestions;
 	private QuestionEntity questionEntity;
 
+	private JogadorRepository jogadorRepos;
+	private ArrayList<Jogador> arrayListJogador;
+	private Jogador jogadorEntity;
 	/**
 	 * A variavel question result do tipo Boolean foi declarada. O objetivo
 	 * dessa variavel é determinar o fim da questão, e é usado para determinar o
@@ -91,6 +96,14 @@ public class QuestionControl {
 		getPreferences(context);
 		selectQuestion();
 		
+		if (jogadorRepos == null) {
+			jogadorRepos = new JogadorRepository(context);
+			arrayListJogador = (ArrayList<Jogador>) jogadorRepos.getAll();
+			jogadorEntity = arrayListJogador.get(0);
+			jumpNumber = jogadorEntity.getPulos();
+			lifeNumber = jogadorEntity.getVidas();
+		}
+		
 		Log.i(TAG_LOG, "setActivityContext");
 	}
 
@@ -101,9 +114,9 @@ public class QuestionControl {
 	}
 
 	private void getListQuestionDb(Context context) {
-		if (repos == null) {
-			repos = new QuestionRepository(context);
-			arrayListQuestions = (ArrayList<QuestionEntity>) repos.getAll();
+		if (questionRepos == null) {
+			questionRepos = new QuestionRepository(context);
+			arrayListQuestions = (ArrayList<QuestionEntity>) questionRepos.getAll();
 			mixList(arrayListQuestions);
 		}
 	}
@@ -193,6 +206,17 @@ public class QuestionControl {
 		setPreferencesBar(60);
 	}
 	
+	public void closeControl(){
+		//jumpNumber = 3;
+		//lifeNumber = 0;
+		//setPreferencesBar(60);
+		jogadorEntity.setPulos(jumpNumber);
+		jogadorEntity.setVidas(lifeNumber);
+		jogadorRepos.update(jogadorEntity);
+		jogadorRepos = null;
+		//uniqueInstance = null;
+	}
+	
 	public Activity getActivityContext() {
 		return activityContext;
 	}
@@ -237,6 +261,12 @@ public class QuestionControl {
 	}
 	public void setLifeNumber(int lifeNumber) {
 		this.lifeNumber = lifeNumber;
+	}
+	public Jogador getJogadorEntity() {
+		return jogadorEntity;
+	}
+	public void setJogadorEntity(Jogador jogadorEntity) {
+		this.jogadorEntity = jogadorEntity;
 	}
 	
 }

@@ -185,4 +185,10 @@ public class QuestionActivity extends FragmentActivity {
 		Log.i(TAG_LOG, "getPositionFragment");
 	}
 
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		control.closeControl();
+	}
+
 }

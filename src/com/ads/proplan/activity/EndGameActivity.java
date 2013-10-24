@@ -40,4 +40,11 @@ public class EndGameActivity extends Activity {
 		finish();
 	}
 	
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		control.closeControl();
+	}
+
+	
 }

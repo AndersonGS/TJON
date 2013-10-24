@@ -7,49 +7,36 @@ import android.content.Context;
 import android.util.Log;
 
 import com.ads.proplan.db.config.DatabaseHelper;
-import com.ads.proplan.db.entity.QuestionEntity;
+import com.ads.proplan.db.entity.Jogador;
 import com.j256.ormlite.dao.Dao;
 
-public class QuestionRepository {
+public class JogadorRepository {
 
 	/**
 	 * A constante TAG_LOG do tipo String foi declarada. O objetivo dessa
 	 * variavel abstrata é determina um titulo para o Log informativo desta
 	 * classe.
 	 */
-	private static final String TAG_LOG = "QuestionRepository";
+	private static final String TAG_LOG = "JogadorRepository";
 
 	private DatabaseHelper db;
-	Dao<QuestionEntity, Integer>  questionEntitysDao;
+	Dao<Jogador, Integer>  jogadorEntitysDao;
 
-	public QuestionRepository(Context ctx) {
+	public JogadorRepository(Context ctx) {
 
-		// DatabaseManager dbManager = new DatabaseManager();
-		// db = dbManager.getHelper(ctx);
 		try {
-			questionEntitysDao = DatabaseHelper
-					.getInstance(ctx).getQuestionDao();
+			jogadorEntitysDao = DatabaseHelper.getInstance(ctx).getJogadorDao();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		Log.i(TAG_LOG, "QuestionRepository");
+		Log.i(TAG_LOG, "JogadorRepository");
 	}
 
-	public int create(QuestionEntity entity) {
+	public int create(Jogador entity) {
 		try {
-			return questionEntitysDao.create(entity);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return 0;
-	}
-
-	public int update(QuestionEntity entity) {
-		try {
-			return questionEntitysDao.update(entity);
+			return jogadorEntitysDao.create(entity);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -57,9 +44,19 @@ public class QuestionRepository {
 		return 0;
 	}
 
-	public int delete(QuestionEntity entity) {
+	public int update(Jogador entity) {
 		try {
-			return questionEntitysDao.delete(entity);
+			return jogadorEntitysDao.update(entity);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public int delete(Jogador entity) {
+		try {
+			return jogadorEntitysDao.delete(entity);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -68,10 +65,10 @@ public class QuestionRepository {
 
 	}
 
-	public List<QuestionEntity> getAll() {
+	public List<Jogador> getAll() {
 		Log.i(TAG_LOG, "getAll");
 		try {
-			return questionEntitysDao.queryForAll();
+			return jogadorEntitysDao.queryForAll();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

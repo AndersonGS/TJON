@@ -8,6 +8,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.ads.proplan.db.entity.Jogador;
 import com.ads.proplan.db.entity.QuestionEntity;
 import com.ads.proplan.db.json.ListEntityGson;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
@@ -34,8 +35,10 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	private static final int DATABASE_VERSION = 2;
 
 	// TODO the DAO object we use to access the SimpleData table
-	private Dao<QuestionEntity, Integer> dao = null;
 	private RuntimeExceptionDao<QuestionEntity, Integer> runtimeDao = null;
+	private Dao<QuestionEntity, Integer> questionDao = null;
+	private Dao<Jogador, Integer> jogadorDao = null;
+	
 	
 	private static DatabaseHelper mInstance = null;
 
@@ -49,6 +52,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		try {
 			Log.i(DatabaseHelper.class.getName(), "onCreate");
 			TableUtils.createTable(connectionSource, QuestionEntity.class);
+			TableUtils.createTable(connectionSource, Jogador.class);
 		} catch (SQLException e) {
 			Log.e(DatabaseHelper.class.getName(), "Não pode criar o database",
 					e);
@@ -59,12 +63,22 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		}
 
 		// here we try inserting data in the on-create as a test
-		RuntimeExceptionDao<QuestionEntity, Integer> dao = getQuestionDataDao();
+		RuntimeExceptionDao<QuestionEntity, Integer> questionDao = getQuestionDataDao();
 		ListEntityGson gson = new ListEntityGson();
 		List<QuestionEntity> list = gson.getListEntity(gson.QUESTION);
 		for (QuestionEntity questionEntity : list) {
-			dao.create(questionEntity);
+			questionDao.create(questionEntity);
 		}
+		
+		RuntimeExceptionDao<Jogador, Integer> jogadorDao = getRuntimeExceptionDao(Jogador.class);
+		Jogador jogador = new Jogador();
+		jogador.setNickName("Anderson");
+		jogador.setPontos(0);
+		jogador.setPulos(0);
+		jogador.setVidas(0);
+		jogadorDao.create(jogador);
+		
+		
 		// TODO
 		// create some entries in the onCreate
 		// TODO
@@ -93,13 +107,22 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
 	}
 
+	public Dao<Jogador, Integer> getJogadorDao()
+			throws java.sql.SQLException {
+		if (jogadorDao == null) {
+			jogadorDao = getDao(Jogador.class);
+		}
+		Log.i(TAG_LOG, "getJogadorDao");
+		return jogadorDao;
+	}
+	
 	public Dao<QuestionEntity, Integer> getQuestionDao()
 			throws java.sql.SQLException {
-		if (dao == null) {
-			dao = getDao(QuestionEntity.class);
+		if (questionDao == null) {
+			questionDao = getDao(QuestionEntity.class);
 		}
 		Log.i(TAG_LOG, "getQuestionDao");
-		return dao;
+		return questionDao;
 	}
 
 	// TODO
@@ -123,6 +146,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	@Override
 	public void close() {
 		super.close();
-		dao = null;
+		questionDao = null;
+		jogadorDao = null;
 	}
 }
