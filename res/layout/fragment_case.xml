@@ -7,22 +7,10 @@
     <ImageView
         android:id="@+id/case_image_arcada"
         android:layout_width="wrap_content"
-        android:layout_height="400dp"
+        android:layout_height="380dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginBottom="20dp"
         android:src="@raw/arcada" />
-
-    <TextView
-        android:id="@+id/case_text_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-
-        android:text="Descrição"
-        android:textSize="15dp" />
 
 </RelativeLayout>

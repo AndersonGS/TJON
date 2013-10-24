@@ -33,7 +33,7 @@ public class CaseFragment extends Fragment {
 		Bundle args = getArguments();
 		control = QuestionControl.getInstance();
 		questionEntity = control.getQuestionEntity();
-		((TextView) rootView.findViewById(R.id.case_text_description)).setText(questionEntity.getDescription());
+		//((TextView) rootView.findViewById(R.id.case_text_description)).setText(questionEntity.getDescription());
 		R.raw rID = new R.raw();
 		try {
 			Field photoNameField = rID.getClass().getField(questionEntity.getImage());

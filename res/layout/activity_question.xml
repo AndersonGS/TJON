@@ -20,12 +20,63 @@
         android:layout_marginBottom="5dp"
         android:src="@raw/bolae" />
 
+    <ImageView
+        android:id="@+id/question_image_topbar"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@raw/bartop" />
+
     <ProgressBar
         android:id="@+id/question_bar_time"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp" />
+
+    <ImageView
+        android:id="@+id/question_image_like1"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:src="@raw/greeball" />
+
+    <ImageView
+        android:id="@+id/question_image_like2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/question_image_like1"
+        android:src="@raw/greeball" />
+
+    <ImageView
+        android:id="@+id/question_image_like3"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/question_image_like2"
+        android:src="@raw/greeball" />
+
+    <TextView
+        android:id="@+id/question_text_time"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="1dp"
+        android:text="60"
+        android:textColor="#FFFFFF"
+        android:textSize="30dp" />
 
 </RelativeLayout>

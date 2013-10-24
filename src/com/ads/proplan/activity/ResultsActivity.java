@@ -20,16 +20,7 @@ public class ResultsActivity extends Activity {
 	
 	@ViewById(R.id.results_image_like)
 	ImageView likeImageView;
-	
-	@ViewById(R.id.results_image_dislike1)
-	ImageView dislikeImageView1;
-	
-	@ViewById(R.id.results_image_dislike2)
-	ImageView dislikeImageView2;
-	
-	@ViewById(R.id.results_image_dislike3)
-	ImageView dislikeImageView3;
-	
+		
 	@ViewById(R.id.results_text_like)
 	TextView likTextView;
 	
@@ -45,8 +36,7 @@ public class ResultsActivity extends Activity {
 	protected void onStart() {
 		super.onStart();
 		control = QuestionControl.getInstance();
-		selectModelo();		
-		setLife(); 
+		selectModelo();				
 		
 		checkLife();
 	}
@@ -55,16 +45,6 @@ public class ResultsActivity extends Activity {
 		if(control.getLifeNumber() == 3){
 			continuiButton.setEnabled(false);
 			timeNext();
-		}
-	}
-
-	private void setLife() {
-		if(control.getLifeNumber() > 0){
-			dislikeImageView3.setImageResource(R.raw.dislike);
-		}if (control.getLifeNumber() > 1) {
-			dislikeImageView2.setImageResource(R.raw.dislike);
-		} if (control.getLifeNumber() > 2) {
-			dislikeImageView1.setImageResource(R.raw.dislike);
 		}
 	}
 

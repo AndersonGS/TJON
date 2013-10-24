@@ -18,6 +18,7 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 
 public class QuestionActivity extends FragmentActivity {
@@ -49,6 +50,8 @@ public class QuestionActivity extends FragmentActivity {
 	private MediaPlayer playerTime;
 
 	private QuestionControl control;
+
+	private TextView timeTextView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +63,13 @@ public class QuestionActivity extends FragmentActivity {
 		
 		imageView = (ImageView) findViewById(R.id.question_image_icone);
 		bar = (ProgressBar) findViewById(R.id.question_bar_time);
+		timeTextView = (TextView) findViewById(R.id.question_text_time);
 		
 		bar.setMax(control.getBarMaxSize());
 		bar.setProgress((int) control.getPreferencesBar());
 		preparingAudio();
 		timeBar();
+		setLife();
 		
 		buildFragmentPages();	
 		Log.i(TAG_LOG, "onCreate");
@@ -85,6 +90,16 @@ public class QuestionActivity extends FragmentActivity {
 			preparingAudio();
 			control.setStatusBar(true);
 			timeBar();
+	}
+	
+	private void setLife() {
+		if(control.getLifeNumber() > 0){
+			((ImageView) findViewById(R.id.question_image_like3)).setImageResource(R.raw.redball);
+		}if (control.getLifeNumber() > 1) {
+			((ImageView) findViewById(R.id.question_image_like2)).setImageResource(R.raw.redball);
+		} if (control.getLifeNumber() > 2) {
+			((ImageView) findViewById(R.id.question_image_like1)).setImageResource(R.raw.redball);
+		}
 	}
 	
 	/**
@@ -108,6 +123,7 @@ public class QuestionActivity extends FragmentActivity {
 					mHandler.post(new Runnable() {
 						public void run() {
 							bar.setProgress((int) mProgressStatus);
+							timeTextView.setText(""+mProgressStatus);
 							control.setPreferencesBar(mProgressStatus);
 						}
 					});

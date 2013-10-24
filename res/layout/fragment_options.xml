@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="60dp"
         android:text="Pergunta"
         android:textAlignment="center"
         android:textSize="20dp"
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="85dp"
         android:text="Responder"
         android:textAlignment="center" />
 
@@ -30,38 +30,38 @@
         android:id="@+id/option_radiongroup_option"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_alignTop="@+id/option_text_question"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:orientation="vertical" >
 
         <RadioButton
             android:id="@+id/option_radioButton1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="5dp"
             android:text="Opção1" />
 
         <RadioButton
             android:id="@+id/option_radioButton2"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:text="Opção2" />
 
         <RadioButton
             android:id="@+id/option_radioButton3"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
+            android:layout_marginTop="5dp"
             android:text="Opção3" />
 
         <RadioButton
             android:id="@+id/option_radioButton4"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
+            android:layout_marginTop="5dp"
             android:text="Opção4" />
     </RadioGroup>
 
