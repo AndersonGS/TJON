@@ -67,10 +67,10 @@ public class QuestionActivity extends FragmentActivity {
 		
 		bar.setMax(control.getBarMaxSize());
 		bar.setProgress((int) control.getPreferencesBar());
+		setLife();
 		preparingAudio();
 		timeBar();
-		setLife();
-		
+
 		buildFragmentPages();	
 		Log.i(TAG_LOG, "onCreate");
 	}
@@ -114,12 +114,12 @@ public class QuestionActivity extends FragmentActivity {
 
 			public void run() {
 				playerTime.start();
-				while (mProgressStatus < control.getBarMaxSize() && control.isStatusBar()) {
+				while (mProgressStatus > 0 && control.isStatusBar()) {
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
 					}
-					mProgressStatus = mProgressStatus + PROGRESS;
+					mProgressStatus = mProgressStatus - PROGRESS;
 					mHandler.post(new Runnable() {
 						public void run() {
 							bar.setProgress((int) mProgressStatus);
@@ -133,7 +133,7 @@ public class QuestionActivity extends FragmentActivity {
 						playerTime.stop();
 					}
 				}
-				if (mProgressStatus >= control.getBarMaxSize()) {
+				if (mProgressStatus == 0) {
 					//control.setPreferencesBar(0);
 					Intent intent = new Intent();
 					intent.setClass(QuestionActivity.this,EndGameActivity_.class);

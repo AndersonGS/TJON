@@ -146,9 +146,9 @@ public class QuestionControl {
 	}
 	
 	public int getPreferencesBar() {
-		int value = 0;
+		int value = 60;
 		if (preferences.contains(TAG_PREF_BAR)) {
-			value = preferences.getInt(TAG_PREF_BAR, 0);
+			value = preferences.getInt(TAG_PREF_BAR, barMaxSize);
 		}
 		return value;
 	}
@@ -190,7 +190,7 @@ public class QuestionControl {
 	public void restartControl(){
 		jumpNumber = 3;
 		lifeNumber = 0;
-		setPreferencesBar(0);
+		setPreferencesBar(60);
 	}
 	
 	public Activity getActivityContext() {
